@@ -1,16 +1,13 @@
 import { Box, CircularProgress, Container, Typography, Grid, Card, CardContent, Divider, CardActions, Button, Alert } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { useState, useEffect } from "react";
-// import AddRecipe from "./AddRecipe";
 import RecipesStore from "../../store/RecipeStore";
 import SingleRecipe from "./SingleRecipe";
-
 const RecipesList: React.FC = observer(() => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showSingleRecipe, setShowSingleRecipe] = useState(false);
   const [selectedRecipeId, setSelectedRecipeId] = useState<string | null>(null);
-
   useEffect(() => {
       const fetchRecipes = async () => {
           try {
@@ -23,10 +20,8 @@ const RecipesList: React.FC = observer(() => {
               setIsLoading(false);
           }
       };
-
       fetchRecipes();
   },RecipesStore.list);
-
   if (isLoading) {
       return (
           <Box 
@@ -39,7 +34,6 @@ const RecipesList: React.FC = observer(() => {
           </Box>
       );
   }
-
   if (error) {
       return (
           <Container maxWidth="lg" sx={{ mt: 4 }}>
@@ -47,24 +41,12 @@ const RecipesList: React.FC = observer(() => {
                   {error}
               </Alert>
               <Box mt={2} display="flex" justifyContent="center">
-                  {/* <AddRecipe /> */}
               </Box>
           </Container>
       );
   }
-
-  return (
-      <>
+  return (<>
           <Container maxWidth="lg" sx={{ mt: 4 }}>
-              {/* <Typography 
-                  variant="h4" 
-                  component="h1" 
-                  gutterBottom 
-                  align="center"
-              >
-                  אתר המתכונים שלי
-              </Typography> */}
-
               {RecipesStore.list.length === 0 ? (
                   <Box 
                       display="flex" 
@@ -75,7 +57,6 @@ const RecipesList: React.FC = observer(() => {
                       <Typography variant="h6" color="textSecondary">
                           אין מתכונים להצגה
                       </Typography>
-                      {/* <AddRecipe /> */}
                   </Box>
               ) : (
                   <>
@@ -127,23 +108,17 @@ const RecipesList: React.FC = observer(() => {
                           justifyContent="center" 
                           mt={4}
                       >
-                          {/* <AddRecipe /> */}
                       </Box>
-                  </>
-              )}
+                  </>)}
           </Container>
-          
           {showSingleRecipe && selectedRecipeId && (
               <SingleRecipe 
                   recipeId={selectedRecipeId} 
                   onClose={() => {
                       setShowSingleRecipe(false);
                       setSelectedRecipeId(null);
-                  }} 
-              />
-          )}
-      </>
+                  }} />
+          )}</>
   );
 });
-
 export default RecipesList;

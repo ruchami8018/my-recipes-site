@@ -20,7 +20,6 @@ import {
   ListAlt as ListAltIcon, 
   AccessTime as AccessTimeIcon 
 } from '@mui/icons-material';
-
 const SingleRecipe = ({ 
   recipeId, 
   onClose 
@@ -30,7 +29,6 @@ const SingleRecipe = ({
 }) => {
   const [recipe, setRecipe] = useState<RecipeType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     const fetchRecipeDetails = async () => {
       try {
@@ -42,10 +40,8 @@ const SingleRecipe = ({
         setIsLoading(false);
       }
     };
-
     fetchRecipeDetails();
   }, [recipeId]);
-
   if (isLoading) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
@@ -53,7 +49,6 @@ const SingleRecipe = ({
       </Box>
     );
   }
-
   if (!recipe) {
     return (
       <Container maxWidth="sm">
@@ -63,25 +58,19 @@ const SingleRecipe = ({
       </Container>
     );
   }
-
   return (
     <Container maxWidth="md">
       <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
         <Typography variant="h4" component="h1" gutterBottom align="center">
           {recipe.title}
         </Typography>
-        
         <Divider sx={{ my: 2 }} />
-        
         <Grid container spacing={3}>
-          {/* תיאור המתכון */}
           <Grid item xs={12}>
             <Typography variant="body1" paragraph>
               {recipe.description}
             </Typography>
           </Grid>
-
-          {/* רכיבים */}
           <Grid item xs={12} md={6}>
             <Typography variant="h6" gutterBottom>
               <ListAltIcon sx={{ verticalAlign: 'middle', mr: 1 }} />
@@ -100,12 +89,7 @@ const SingleRecipe = ({
               </List>
             )}
           </Grid>
-
           <Grid container spacing={3}>
-          {/* <Typography variant="h6" gutterBottom>
-              <ListAltIcon sx={{ verticalAlign: 'middle', mr: 1 }} />
-              רכיבים:
-            </Typography> */}
             <Grid item xs={12}>
               <Typography variant="body1" paragraph>
                 {recipe.instructions}
@@ -113,21 +97,18 @@ const SingleRecipe = ({
             </Grid>
           </Grid>
         </Grid>
-
         <Divider sx={{ my: 2 }} />
-        
         <Box display="flex" justifyContent="center" mt={2}>
           <Button 
             variant="contained" 
             color="primary" 
             onClick={onClose}
           >
-            סגור
+            CLOSE
           </Button>
         </Box>
       </Paper>
     </Container>
   );
 };
-
 export default SingleRecipe;

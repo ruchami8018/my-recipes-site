@@ -93,7 +93,6 @@ const Navbar = () => {
            >
              Log-up
            </Button>
-
            </>:<>
            <Button 
              component={RouterLink}
@@ -149,5 +148,4 @@ const Navbar = () => {
     </>
   );
 };
-
 export default Navbar;

@@ -5,5 +5,5 @@ export type RecipeType = {
     description: string,
     authorId: string,
     ingredients: string[],
-    instructions: string
+    instructions:A string
 }
